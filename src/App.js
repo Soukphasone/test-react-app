@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 const App = () => {
-  const [dataToSend, setDataToSend] = useState('');
-
-  const sendDataToFlutter = () => {
-    // Assume 'flutterBridge' is the reference to the bridge object provided by the WebView.
-    // You need to call a method 'sendDataToFlutter' on this object with data as a parameter.
-    // This 'sendDataToFlutter' method should be implemented in the Flutter side to receive data.
-    window.flutterBridge.sendDataToFlutter(dataToSend);
+  const sendMessageToFlutter = () => {
+    const dataToSend = { message: 'Hello from React!' }; // Example data
+    window.flutterChannel.postMessage(JSON.stringify(dataToSend));
+    console.log("Send Data to Flutter: ", dataToSend)
   };
+
+  useEffect(() => {
+    sendMessageToFlutter(); // Send data on component mount (or trigger based on your logic)
+  }, []);
 
   return (
     <div>
-      <input
-        type="text"
-        value={dataToSend}
-        onChange={(e) => setDataToSend(e.target.value)}
-        placeholder="Type something..."
-      />
-      <button onClick={sendDataToFlutter}>Send Data to Flutter</button>
+      {/* Your React app content here */}
+      <button onClick={sendMessageToFlutter}>Send Data to Flutter</button>
     </div>
   );
 };
