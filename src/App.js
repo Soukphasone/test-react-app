@@ -1,35 +1,26 @@
-// React component sending data to Flutter WebView
-import React from 'react';
+import React, { useState } from 'react';
 
-function App() {
-  // Define the Toaster object
-
+const App = () => {
+  const [dataToSend, setDataToSend] = useState('');
 
   const sendDataToFlutter = () => {
-    // Data to send to Flutter WebView
-    // const data = {
-    //   message: 'Hello from React!',
-    //   someValue: 42,
-    // };
-
-    // // Send data to Flutter WebView
-    // window.Toaster.postMessage(data, '*');
-    var Toaster = {
-      postMessage: function(message) {
-        // Implementation of postMessage method
-        console.log(message);
-      }
-    };
-    
-    // Now you can use the Toaster object
-    Toaster.postMessage("Hello, world!");
+    // Assume 'flutterBridge' is the reference to the bridge object provided by the WebView.
+    // You need to call a method 'sendDataToFlutter' on this object with data as a parameter.
+    // This 'sendDataToFlutter' method should be implemented in the Flutter side to receive data.
+    window.flutterBridge.sendDataToFlutter(dataToSend);
   };
 
   return (
     <div>
+      <input
+        type="text"
+        value={dataToSend}
+        onChange={(e) => setDataToSend(e.target.value)}
+        placeholder="Type something..."
+      />
       <button onClick={sendDataToFlutter}>Send Data to Flutter</button>
     </div>
   );
-}
+};
 
 export default App;
