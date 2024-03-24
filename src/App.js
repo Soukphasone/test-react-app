@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+// React component sending data to Flutter WebView
+import React from 'react';
 
 function App() {
+  const sendDataToFlutter = () => {
+    // Data to send to Flutter WebView
+    const data = {
+      message: 'Hello from React!',
+      someValue: 42,
+    };
+
+    // Send data to Flutter WebView
+    window.postMessage(data, '*');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={sendDataToFlutter}>Send Data to Flutter</button>
     </div>
   );
 }
