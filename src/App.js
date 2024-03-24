@@ -10,7 +10,7 @@ function App() {
     };
 
     // Send data to Flutter WebView
-    window.postMessage(data, '*');
+    window.Toaster.postMessage(data, '*');
   };
 
   return (
