@@ -1,22 +1,18 @@
-import React, { useEffect } from 'react';
-
-const App = () => {
-  const sendMessageToFlutter = () => {
-    const dataToSend = { message: 'Hello from React!' }; // Example data
-    window.flutterChannel.postMessage(JSON.stringify(dataToSend));
-    console.log("Send Data to Flutter: ", dataToSend)
-  };
-
-  useEffect(() => {
-    sendMessageToFlutter(); // Send data on component mount (or trigger based on your logic)
-  }, []);
-
+import React, { useState, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScanQR from './components/ScanQRCode';
+import GenerateQR from './components/GenerateQR';
+import {Confirm} from './components/Confirmbill';
+function App() {
   return (
-    <div>
-      {/* Your React app content here */}
-      <button onClick={sendMessageToFlutter}>Send Data to Flutter</button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<GenerateQR />} /> {/* Home route */}
+        <Route path="/scan" element={<ScanQR />} /> {/* QR code scanning route */}
+        <Route path="/scan/confirm/:sign" element={<Confirm />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
