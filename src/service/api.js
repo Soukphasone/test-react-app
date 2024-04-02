@@ -13,7 +13,7 @@ export const fetchOrders = async (sign) => {
     } catch (error) {
     }
 };
-export const updateOrderStatus = async (id, status, headers) => {
+export const confrim_Scan = async (id, status, headers) => {
     try {
         const response = await api.put(`/order/${id}`, { status }, { headers });
         return response.data;

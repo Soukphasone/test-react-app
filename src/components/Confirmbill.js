@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchOrders, updateOrderStatus } from '../service/api';
+import { fetchOrders, confrim_Scan } from '../service/api';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 export function Confirm() {
@@ -31,7 +31,7 @@ export function Confirm() {
     const handleUpdateStatus = async (id) => {
         if (window.confirm('Are you sure?'))
         try {
-            await updateOrderStatus(id, 'OFFLINE', headers);
+            await confrim_Scan(id, 'OFFLINE', headers);
             navigate('/')
         } catch (error) {
             console.log(error);
@@ -56,8 +56,7 @@ export function Confirm() {
                         <li>{`Sign: ${item.sign}`}</li>
                         <li>{`Car_Type: ${item.carType}`}</li>
                         <li>{`Amout: ${item.amount}`}</li>
-                        <li>{`Money: ${item.money}`}</li>
-                       
+                        <li>{`Money: ${item.money}`}</li>     
                         {/* <li><h2>This QR is True</h2></li> */}
                         <br /> 
                         <button onClick={() => handleUpdateStatus(item._id)}>Confirm</button>
