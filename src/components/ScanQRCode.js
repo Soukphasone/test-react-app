@@ -14,7 +14,8 @@ function ScanQR() {
     const handleScan = async () => {
         try {
             const video = scannerRef.current;
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            // const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }); // Specify rear camera
             video.srcObject = stream;
             video.onplay = () => {
                 const canvas = document.createElement('canvas');
